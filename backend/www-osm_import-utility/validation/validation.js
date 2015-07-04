@@ -73,7 +73,6 @@ var assertId = function (callback){
 var assertNotUndefined = function(obj, message){
     if (obj === undefined || obj === null){
         log.error("Obj is null or undefined: "+message);
-//        log.error(callback);
     }
 }
 

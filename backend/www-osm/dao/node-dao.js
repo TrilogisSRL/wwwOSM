@@ -31,9 +31,9 @@ var error = require('./../util/error.js');
 var queries = require('./../queries/node-dao-queries.js');
 
 /**
- * Retrieve the node with the given identifier, including its tags, properties and level of detail
- * @param id the identifier
- * @param callback the object which contains the information about the current process and the next methods calls
+ * Retrieve the node with the given identifier, including its tags, properties and style
+ * @param id The identifier of the Node
+ * @param callback the object which contains the information about the current process and the next calls
  */
 var getNodeById = function(id, callback) {
 

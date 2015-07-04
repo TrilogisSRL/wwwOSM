@@ -120,8 +120,6 @@ var getPolygonsByBBox = function(callback) {
      */
     callback.entity = "way";
 
-//    console.log ("lod >>>>pol "+callback.lod);
-
     /*
      The variables are now ready to be used within the query
      */
@@ -178,8 +176,6 @@ var getPolylinesByBBox = function(callback) {
         callback.lod
         ];
 
-//    console.log ("lod >>>>lines "+callback.lod);
-
     var list = callback.excludeLines;
 
     /*
@@ -198,54 +194,11 @@ var getPolylinesByName = function(callback){
      The callback object includes the way builder method call and the one for the exposure
      of the information via JSON.
      */
-//    console.log(queries.getPolylinesByName());
-//    console.log(_params);
-//    console.log(callback);
     database.execute(queries.getPolylinesByName(), _params, callback);
 }
 
-
-//var getWaysByBBox = function(callback) {
-//    /*
-//     Check the validity of the bounding box. An error is raised if it is not satisfied
-//     */
-//    if (!validator.bbox(callback.bbox)){
-//        error.send(callback, "invalid bounding box");
-//    }
-//
-//    /*
-//     Check the validity of the level of detail. An error is raised if it is not satisfied
-//     */
-//    if (!validator.lod(callback.lod)){
-//        error.send(callback, "invalid level of detail");
-//    }
-//
-//    /*
-//     set the current entity type
-//     */
-//    callback.entity = "way";
-//
-//    /*
-//     The variables are now ready to be used within the query
-//     */
-//    var _params = [ callback.bbox.latitudeLB,
-//                    callback.bbox.longitudeLB,
-//                    callback.bbox.latitudeUB,
-//                    callback.bbox.longitudeUB,
-//                    callback.lod];
-//
-//    /*
-//     The callback object includes the way builder method call and the one for the exposure
-//     of the information via JSON.
-//     */
-//    db.execute(queries.getWaysByBBox(), _params, callback);
-//}
-
 module.exports.getPolygonByOsmId = getPolygonByOsmId;
 module.exports.getPolylineByOsmId = getPolylineByOsmId;
-//module.exports.getWayById = getWayById;
-//module.exports.getWaysByBBox = getWaysByBBox;
 module.exports.getPolygonsByBbox = getPolygonsByBBox;
-//module.exports.bboxRoads = bboxRoads;
 module.exports.getPolylinesByBbox = getPolylinesByBBox;
 module.exports.getPolylinesByName = getPolylinesByName;

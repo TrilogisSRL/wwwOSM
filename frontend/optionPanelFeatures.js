@@ -94,9 +94,6 @@ var enableOptionPanel = function(){
             y -= canvas.offsetTop;
 
             var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
-            //console.log(pickList.objects);
-            //console.log(pickList.objects.length);
-            //console.log("-----------");
             $("#osm_id").empty();
             for (var i in pickList.objects){
                 if (pickList.objects[i].userObject.osmid){

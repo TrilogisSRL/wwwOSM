@@ -1,13 +1,12 @@
 /**
+/**
  * @author Trilogis Srl
  * @author Gustavo German Soria
  *
  */
 
 var endpoint = "http://wwwosm.trilogis.it/api";
-
 var currentLog = 0;
-
 var panels = [];
 var buttons = ['submitButton'];
 var links = [];
@@ -79,11 +78,8 @@ var fillSourceList = function () {
         success: function(result) {
             if (result){
 
-                //console.log(result);
-
                 $('#sources').empty();
                 result.forEach(function(entry){
-                    //console.log(entry);
                     $('#sources').append(sourceEntry(entry.source_id, entry.last_log_id, entry.source_url, entry.source_filename, entry.last_import));
                 });
 
@@ -151,7 +147,6 @@ var submitButtonAction = function () {
 var updateLogPanel = function(counter){
     if (counter > 0){
         setTimeout(function(){
-            //console.log("counter: "+counter);
             retrieveLog(currentLog);
             updateLogPanel(--counter);
         }, 2000);
@@ -161,29 +156,26 @@ var updateLogPanel = function(counter){
 }
 
 var doImport = function(id){
+    id = id.replace("sourceId", "");
+    jQuery.ajax({
+        type: "GET",
+        url:   endpoint+"/import/"+id,
+        success: function(result) {
+            if (result){
+                updateSourceTimestamp(id);
+                currentLog = result.log_id;
+                $("#logPanel").show("slow");
+                //alert("currentLog: "+currentLog);
+                retrieveLog(currentLog);
 
-    $('#editModal').modal('show');
+                updateLogPanel(20);
+            }
+        },
 
-    //id = id.replace("sourceId", "");
-    //jQuery.ajax({
-    //    type: "GET",
-    //    url:   endpoint+"/import/"+id,
-    //    success: function(result) {
-    //        if (result){
-    //            updateSourceTimestamp(id);
-    //            currentLog = result.log_id;
-    //            $("#logPanel").show("slow");
-    //            //alert("currentLog: "+currentLog);
-    //            retrieveLog(currentLog);
-    //
-    //            updateLogPanel(20);
-    //        }
-    //    },
-    //
-    //    fail: function (){console.log("fail")},
-    //    async:      true,
-    //    crossDomain:true
-    //});
+        fail: function (){console.log("fail")},
+        async:      true,
+        crossDomain:true
+    });
 }
 
 var updateSourceTimestamp = function(id){
@@ -212,8 +204,6 @@ var updateLogButtonAction = function(){
 
 var submitButton =  document.getElementById("submitButton");
 submitButton.onclick = submitButtonAction;
-//var importButton =  document.getElementById("importButton");
-//importButton.onclick = doImport;
 var updateLogButton =  document.getElementById("reloadButton");
 updateLogButton.onclick = updateLogButtonAction;
 var closeButton =  document.getElementById("closeButton");

@@ -263,13 +263,11 @@ var getNames = function(callback){
 
     var table = getTempTable(callback);
     var query = "SELECT osm_id, name FROM "+table+" WHERE name IS NOT NULL";
-    //console.log(query);
     return query;
 }
 
 
 var storeName = function (callback) {
-    //console.log(callback);
     var nameTable = getNameTable(callback);
     var nameRelTable = getNameRelTable(callback);
 
@@ -289,14 +287,6 @@ var storeName = function (callback) {
         "(SELECT * FROM "+nameRelTable+" WHERE osm_id = $2::bigint AND name_id = (SELECT name_id FROM "+nameTable+" WHERE name = $1::varchar)) "+
         "); "+
         "END; COMMIT;";
-
-
-    //var query = "INSERT INTO "+nameTable+" (name) VALUES ($1::varchar);"+
-    //
-    //"INSERT INTO "+nameRelTable+" VALUES ($2::bigint, (SELECT name_id FROM "+nameTable+" WHERE name = $1::varchar) );"
-
-    //console.log(query);
-
     return query;
 }
 

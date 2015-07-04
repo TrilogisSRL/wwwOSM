@@ -3,13 +3,15 @@
  * @author Gustavo German Soria
  *
  */
-
+/**
+ * @author Trilogis Srl
+ * @author Gustavo German Soria
+ */
 
 var endpoint = "http://wwwosm.trilogis.it/api";
 
 var polygonStyleList = [];
 var selectedStyle = 0;
-
 var panels = [];
 
 var ORDER_BY_KEY = 0;
@@ -20,7 +22,6 @@ var POLYGON = 0;
 var LINE = 1;
 
 var selectedType = 0;
-
 var selectedSorting = 0;
 
 var getType = function(){

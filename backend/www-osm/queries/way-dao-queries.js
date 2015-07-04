@@ -6,7 +6,7 @@
  */
 
 /**
- * It retrieves a polygon object with its properties and tags by providing its identifier.
+ * Retrieve a polygon object with its properties and tags by providing its identifier.
  *
  * It requires the following parameters:
  *
@@ -21,7 +21,7 @@ var getPolygonByOsmId = function(){
 }
 
 /**
- * It retrieves a polyline object with its properties and tags by providing its identifier.
+ * Retrieves a polyline object with its properties and tags by providing its identifier.
  *
  * It requires the following parameters:
  *
@@ -37,7 +37,7 @@ var getPolylineByOsmId = function(){
 }
 
 /**
- * It retrieves polygons (each of them with its properties and tags included) by providing a bounding box.
+ * Retrieve polygons (each of them with its properties and tags included) by providing a bounding box.
  * If some parts of the geometries are not in the selected bounding box, then the geometries are cut and only the parts
  * within the bounding box are maintained.
  *
@@ -68,7 +68,7 @@ var getPolygonsByBbox = function(list){
 }
 
 /**
- * It retrieves polylines (each of them with its properties and tags included) by providing a bounding box.
+ * Retrieve lines (each of them with its properties and tags included) by providing a bounding box.
  * If some parts of the geometries are not in the selected bounding box, then the geometries are cut and only the parts
  * within the bounding box are maintained.
  *

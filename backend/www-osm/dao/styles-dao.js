@@ -23,6 +23,10 @@ var database = require('./../db/db.js');
  */
 var val = require('./../util/validator.js');
 
+/**
+ * Retrieve all the styles record as a list related to the polygons
+ * @param callback callback object
+ */
 var getPolygonStyles = function(callback){
     /*
      query execution
@@ -30,6 +34,11 @@ var getPolygonStyles = function(callback){
     database.execute(queries.getPolygonStyles(), [], callback);
 }
 
+/**
+ * Retrieve all the styles record as a list related to the polygons.
+ * The list is ordered by LOD
+ * @param callback callback object
+ */
 var getPolygonStylesOrderByLod = function(callback){
     /*
      query execution
@@ -37,6 +46,11 @@ var getPolygonStylesOrderByLod = function(callback){
     database.execute(queries.getPolygonStylesOrderByLod(), [], callback);
 }
 
+/**
+ * Retrieve all the styles record as a list related to the polygons.
+ * The list is ordered by Elevation
+ * @param callback callback object
+ */
 var getPolygonStylesOrderByElevation = function(callback){
     /*
      query execution
@@ -44,7 +58,10 @@ var getPolygonStylesOrderByElevation = function(callback){
     database.execute(queries.getPolygonStylesOrderByElevation(), [], callback);
 }
 
-
+/**
+ * Update the style record of a polygon
+ * @param callback callback object
+ */
 var updatePolygonStyle = function(callback){
     /*
      initialization of the parameters for the parametrized query
@@ -58,7 +75,10 @@ var updatePolygonStyle = function(callback){
 }
 
 //line
-
+/**
+ * Retrieve all the styles record as a list related to the lines
+ * @param callback callback object
+ */
 var getLineStyles = function(callback){
     /*
      query execution
@@ -66,6 +86,11 @@ var getLineStyles = function(callback){
     database.execute(queries.getLineStyles(), [], callback);
 }
 
+/**
+ * Retrieve all the styles record as a list related to the lines.
+ * The list is ordered by LOD
+ * @param callback callback object
+ */
 var getLineStylesOrderByLod = function(callback){
     /*
      query execution
@@ -73,6 +98,10 @@ var getLineStylesOrderByLod = function(callback){
     database.execute(queries.getLineStylesOrderByLod(), [], callback);
 }
 
+/**
+ *  Update the style record of a line
+ * @param callback callback object
+ */
 var updateLineStyle = function(callback){
     /*
      initialization of the parameters for the parametrized query

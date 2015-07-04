@@ -15,7 +15,10 @@ var sourceDAO = require('./../dao/sources-dao.js');
 var responseUtil = require('./../services_util/response.js');
 
 
-
+/**
+ * Internal use
+ * @param callback
+ */
 var execute = function(callback){
 
     var isValid = function(str){
@@ -33,15 +36,8 @@ var execute = function(callback){
     }
 
     if (callback.log.log_id){
-        console.log("execute");
-
         responseUtil.outputLogId(callback);
-        //console.log(callback);
-
-        console.log("execute2");
-
         var spawn = require('child_process').spawn;
-        //var child = spawn('./../www-osm_import-utility/test.sh', []);
         console.log("./import.sh "+callback.source.source_url+" "+callback.source.source_filename);
         var child = spawn('./../www-osm_import-utility/import.sh', [callback.source.source_url, callback.source.source_filename]);
 
@@ -57,29 +53,24 @@ var execute = function(callback){
             var string = "";
             try {
                 string = decodeURI(data);
-                //console.log(string);
                 if (isValid(string)){
                     console.log(string);
                     logDAO.createLogDetail(callback.log.log_id, string);
                 }
             } catch (ex){
-                //string = "Processing...";
-                //console.log(string);
                 logDAO.createLogDetail(callback.log.log_id, string);
             }
         });
 
-        //child.stderr.on('end', function (data) {
-        //    //console.log("end ----");
-        //    //process.exit(0);
-        //});
     } else {
-        console.log(">>>>>error on method EXECUTE");
-        console.log(callback);
+        // nothing to do
     }
 }
 
-//PUBLIC METHODS
+/**
+ * Web services for the Import process
+ * @param router
+ */
 function listen (router){
 
     var fillSourceObj = function(callback){
@@ -109,7 +100,6 @@ function listen (router){
     }
 
     router.get('/import/:id', function(request, response) {
-        //console.log("IMPORT")
         var sourceId = request.params.id;;
         var callback = {
 
@@ -123,7 +113,6 @@ function listen (router){
 
     router.get('/log/:id', function(request, response) {
         var logId = request.params.id;
-        //console.log("IMPORT")
 
         var callback = {
             log : {logId : logId},

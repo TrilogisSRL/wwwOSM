@@ -21,7 +21,6 @@ var send = function(callback) {
 var print = function(callback) {
 
     if (callback.rows.length === 0){
-//        callback.parameter.setHeader('Content-Type', 'application/json');
         callback.parameter.end(JSON.stringify({"type": "GeometryCollection", "geometries": []}));
         return;
     }
@@ -31,9 +30,6 @@ var print = function(callback) {
     if (callback.obj === undefined){
         callback.obj = {"type": "GeometryCollection", "geometries": []};
     }
-
-//    delete callback.rows[0];
-//    delete callback.rows[1];
 
     for (var i in callback.rows){
 
@@ -78,7 +74,6 @@ var printSources = function(callback){
         callback.parameter.setHeader('Access-Control-Allow-Origin', '*');
         callback.parameter.end(JSON.stringify(callback.rows));
     } else {
-    console.log("errrrrrr");
     callback.parameter.end("an error as occurred with code 0021");
 }
 }
@@ -89,7 +84,6 @@ var printSource = function(callback){
         callback.parameter.setHeader('Access-Control-Allow-Origin', '*');
         callback.parameter.end(JSON.stringify(callback.rows[0]));
     } else {
-        console.log("errrrrrr");
         callback.parameter.end("an error as occurred with code 0022");
     }
 
@@ -135,7 +129,6 @@ var printGeometries = function(callback) {
     if (callback.rows) {
         for (var i in callback.rows){
             var obj = callback.rows[i];
-            console.log(obj);
             var geom = JSON.parse(callback.rows[i].geom);
             toJSON = {
                 'type': geom.type,
@@ -185,7 +178,6 @@ var printNames = function(callback) {
                     'id'    : callback.rows[j].osm_id,
                     'value' : callback.rows[j].name,
                     'type' : callback.entity
-//                    'lod' : callback.rows[j].lod
                 });
             }
         }
@@ -213,7 +205,6 @@ var outputNames = function(callback) {
 };
 
 var outputLogId = function(callback) {
-    //console.log(">>>>>>>>>>>>>>>>outputLogId")
     if (callback){
         if (callback.log){
             callback.parameter.setHeader('Content-Type', 'application/json');
@@ -226,16 +217,12 @@ var outputLogId = function(callback) {
 };
 
 var outputLog = function(callback) {
-    //console.log("outputLog");
     if (callback){
         if (callback.rows){
             callback.parameter.setHeader('Content-Type', 'application/json');
             callback.parameter.setHeader('Access-Control-Allow-Origin', '*');
-            //console.log("outputLog----");
-            //console.log(callback.log);
             callback.parameter.end(JSON.stringify(callback.rows));
         } else {
-            console.log("error has occured");
             callback.parameter.end("an error as occurred with code 0023");
         }
     }

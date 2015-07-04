@@ -5,49 +5,8 @@
  * Node-DAO-queries module
  */
 
-///**
-// * Node module
-// * @type {exports}
-// */
-//var node = require('./../models/node.js');
-//
-///**
-// * NodeTag module
-// * @type {exports}
-// */
-//var nodeTag = require('./../models/nodeTag.js');
-//
-///**
-// * NodeTagName module
-// * @type {exports}
-// */
-//var nodeTagName = require('./../models/nodeTagName.js');
-//
-///**
-// * NodeType module
-// * @type {exports}
-// */
-//var nodeType = require('./../models/nodeType.js');
-//
-///**
-// * It permits to retrieve a Node object with its properties and tags by providing its identifier.
-// * It requires the following parameters:
-// * 1: bigint -> node's identifier.
-// *
-// * @returns {string} the query
-// */
-//var getNodeById = function(){
-//    var _query = "" +
-//        "SELECT "+node.model.nodeId+", to_json(array_agg("+nodeType.model.tablename+")) as type, ST_AsGeoJSON("+node.model.geom+") as geom, to_json(array_agg("+nodeTag.model.tablename+")) AS tags, to_json(array_agg("+nodeTagName.model.tablename+")) AS names " +
-//        "FROM ("+node.model.tablename+" NATURAL JOIN "+nodeType.model.tablename+") LEFT JOIN "+nodeTag.model.tablename+" ON "+node.model.nodeId+" = "+nodeTag.model.parentId+" LEFT JOIN "+nodeTagName.model.tablename+" ON "+node.model.nodeId+" = "+nodeTagName.model.parentId+"  " +
-//        "WHERE "+node.model.nodeId+" = $1::bigint AND is_deleted = false" +
-//        "GROUP BY "+node.model.nodeId+" " +
-//        "LIMIT 1";
-//    return _query;
-//}
-
 /**
- * It retrieves a point with its properties and tags by providing its identifier.
+ * Retrieve a point with its properties and tags by providing its identifier.
  *
  * It requires the following parameters:
  *
@@ -61,7 +20,7 @@ var getPointByOsmId = function(){
 }
 
 /**
- * It retrieves all the nodes (each of them with its properties and tags included) by providing a bounding box.
+ * Retrieve all the nodes (each of them with its properties and tags included) by providing a bounding box.
  * If some parts of the geometries are not in the selected bounding box, then the geometries are cut and only the parts
  * within the bounding box are maintained.
  *

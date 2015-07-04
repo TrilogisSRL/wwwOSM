@@ -121,7 +121,6 @@ var executeQuery = function(database, query, params, callback){
                         console.error('error running query\n'+query+"\n"+params+"\n", err);
                     }
                 }
-//                return
             } else {
                 /*
                 At this step the query has been correctly executed
@@ -261,8 +260,6 @@ var executeStoreNameQuery = function(database, vars, callback){
             "(SELECT * FROM "+nameRelTable+" WHERE osm_id = $2::bigint AND name_id = (SELECT name_id FROM "+nameTable+" WHERE name = $1::varchar)) "+
             ");";
 
-        //assume `client` is a connected instance of a postgres client
-        //client.query('BEGIN');
         client.query("INSERT INTO "+nameTable+" "+
             "(name) "+
             "SELECT $1::varchar "+
@@ -274,13 +271,8 @@ var executeStoreNameQuery = function(database, vars, callback){
             client.query(query2, vars, function(err, result) {
                 done();
                 if(err) {
-                    //console.error('error running query\n'+query2+"\n"+vars+"\n", err);
-                    //if there was an error postgres has already & automatically rolled back changes from the INSERT command
-                    //so execute any application error handling here
                 }
                 else {
-                    //console.log("query executed");
-                    //client.query('COMMIT');  //I guess 'END' works as well, but COMMIT is what's documented by Postgres
                     if (callback && callback.list) {
                         var _next = callback.list.pop();
                         if (_next) {

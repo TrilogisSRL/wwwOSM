@@ -35,18 +35,12 @@
         }
 
         var removePolygon = function(id){
-//            console.log(id);
-//            console.log("remove");
             id = id.replace("remove", "");
-//            console.log(id);
             removeHighlightedPolygon(id);
         }
 
         var selectPolygon = function(id){
-//            console.log(id);
-//            console.log("select");
             id = id.replace("select", "");
-//            console.log(id);
             selectResultEntry(id);
         }
 
@@ -58,7 +52,6 @@
 
         var hideDescriptionPanel = function(){
             $("#description_panel").css('display','none');
-
             return false;
         }
 
@@ -77,7 +70,7 @@
         </div>
         <button id="settingsButton" type="button" class="btn btn-default navbar-btn navbar-right">
             <span class="glyphicon glyphicon-cog" aria-hidden="true"> Settings</span>
-            </button>
+        </button>
 
         <div class="navbar-form navbar-left-block" role="search">
 
@@ -123,8 +116,6 @@
                             Disabled
                         </button>
 
-                        <!--<input id="layer_bing" type="checkbox" name="my-checkbox" checked>-->
-                        <!--<input  id="layer_bing" type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-size="small" data-width="100">-->
                     </div>
 
                 </div>
@@ -134,8 +125,6 @@
                         <label for="layer_bmng_landsat"><h5>BMNG Landsat Layer</h5></label>
                     </div>
                     <div class="col-md-6">
-                        <!--<input  id="layer_bmng_landsat" type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-size="small" data-width="100">-->
-                        <!--</div>-->
 
                         <button id="layer_bmng_landsat" type="button" class="btn btn-default" >
                             Disabled
@@ -149,9 +138,6 @@
                         <label for="layer_compass"><h5>Compass Layer</h5></label>
                     </div>
                     <div class="col-md-6">
-                        <!--<input  id="layer_compass" type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-size="small" data-width="100">-->
-                        <!--</div>-->
-
                         <button id="layer_compass" type="button" class="btn btn-primary" >
                             Enabled
                         </button>
@@ -160,29 +146,11 @@
 
                 <hr/>
 
-                <!--<div class="row">-->
-                    <!--<div class="col-md-6">-->
-                        <!--<label for="fun_highlight"><h5>Highlight Ctrl</h5></label>-->
-                    <!--</div>-->
-                    <!--<div class="col-md-6">-->
-                        <!--&lt;!&ndash;<input  id="fun_highlight" type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-size="small" data-width="100">&ndash;&gt;-->
-                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-                        <!--<button id="fun_highlight" type="button" class="btn btn-default" >-->
-                            <!--Disabled-->
-                        <!--</button>-->
-                    <!--</div>-->
-
-                <!--</div>-->
-
                 <div class="row">
                     <div class="col-md-6">
                         <label for="fun_tiled_roofs"><h5>Tiled roofs</h5></label>
                     </div>
                     <div class="col-md-6">
-                        <!--<input  id="fun_tiled_roofs" type="checkbox" checked data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-size="small" data-width="100">-->
-                        <!--</div>-->
-
                         <button id="fun_tiled_roofs" type="button" class="btn btn-primary" >
                             Enabled
                         </button>
@@ -197,8 +165,6 @@
                         <h5>Draw Outline</h5>
                     </div>
                     <div class="col-md-6">
-                        <!--<input  id="fun_outline" type="checkbox" checked data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-size="small" data-width="100">-->
-                        <!--</div>-->
                         <button id="fun_outline" type="button" class="btn btn-primary" >
                             Enabled
                         </button>
@@ -210,8 +176,6 @@
                         <h5>Extrusion</h5>
                     </div>
                     <div class="col-md-6">
-                        <!--<input  id="fun_outline" type="checkbox" checked data-toggle="toggle" data-on="Enabled" data-off="Disabled" data-size="small" data-width="100">-->
-                        <!--</div>-->
                         <button id="fun_extrusion" type="button" class="btn btn-primary" >
                             Enabled
                         </button>
@@ -219,23 +183,17 @@
                 </div>
 
                 <div class="row">
-                    <!--<div class="col-md-6">-->
-                        <ul class="nav nav-pills">
+                    <ul class="nav nav-pills">
+                        <li role="presentation" id="handleOsmDataButton" class="enabled"><a href="import.html">Import Settings</a></li>
+                        <li role="presentation" id="handleOsmStyleButton" class="enabled"><a href="styles.html">Style Customization</a></li>
 
-                            <li role="presentation" id="handleOsmDataButton" class="enabled"><a href="import.html">Import Settings</a></li>
-                            <li role="presentation" id="handleOsmStyleButton" class="enabled"><a href="styles.html">Style Customization</a></li>
-
-                        </ul>
-                    </div>
-                    <!--<div class="col-md-6">-->
-
-                    </div>
+                    </ul>
                 </div>
-
-
             </div>
-        <!--</div>-->
-    <!--</div>-->
+        </div>
+
+
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -266,7 +224,6 @@
             <div class="panel panel-default-block" style="display: none;" id="selected_geoms_panel">
                 <div class="panel-body">
                     <div class="modal-header">
-                        <!--<button id="selected_items" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
                         <h2 class="panel-title">Selected Geometries</h2>
                     </div>
                     <div id="highlightedPolygons">

@@ -1,46 +1,116 @@
-// WWD
+/**
+ * @author Trilogis Srl
+ * @author Gustavo German Soria
+ */
+
+/**
+ * Web World Wind global variable
+ */
 var wwd = new WorldWind.WorldWindow("wwd");
+
+/**
+ * Canvas in which Web World Wind is embedded
+ * @type {Element}
+ */
 var canvas = document.getElementById("wwd");
 
+/**
+ * APIs Endpoint
+ * @type {string}
+ */
 var endpoint = "http://wwwosm.trilogis.it/api";
 
+/*
+disable Web World Wind logging
+ */
 WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_NONE);
 
+/*
+ BMNG Landsat Layer
+ */
 var bmngLandsatLayer = new WorldWind.BMNGLandsatLayer();
+
+/*
+ Bing imagery Layer
+ */
 var bingAerialWithLabelsLayer = new WorldWind.BingAerialWithLabelsLayer(null);
+
+/*
+ Compass Layer
+ */
 var compassLayer = new WorldWind.CompassLayer();
+
+/*
+ Control Panel Layer
+ */
 var viewControlLayer = new WorldWind.ViewControlsLayer(wwd);
+
+/*
+ OpenStreetMap imagery Layer
+ */
 var osmLayer =  new WorldWind.OpenStreetMapImageLayer();
 
+/*
+ Web World Wind background color
+ */
 wwd.drawContext.clearColor = WorldWind.Color.colorFromBytes(0,0,0,0);
 
+/*
+ BMNG Landsat Layer is disabled by default
+ */
 bmngLandsatLayer.enabled = false;
+
+/*
+ Bing imagery Layer is disabled by default
+ */
 bingAerialWithLabelsLayer.enabled = false;
+
+/*
+ The previous layers are added to the Web World Wind instance
+ */
 wwd.addLayer(compassLayer);
 wwd.addLayer(viewControlLayer);
 wwd.addLayer(osmLayer);
 wwd.addLayer(bmngLandsatLayer);
 wwd.addLayer(bingAerialWithLabelsLayer);
 
-
+/*
+ Layer with the OpenStreetMap geometries
+ */
 var shapesLayer = new WorldWind.RenderableLayer("wwwOSM");
 wwd.addLayer(shapesLayer);
 var _shapeAttributes = new WorldWind.ShapeAttributes(null);
 
+/*
+ Globe elevation settings
+ */
 var globe = wwd.globe;
 globe.elevationModel = new WorldWind.ZeroElevationModel();
 
+/*
+ Map projection settings
+ */
 var map = new WorldWind.Globe2D();
 map.elevationModel = new WorldWind.EarthElevationModel();
 map.projection = new WorldWind.ProjectionEquirectangular();
 
+/*
+ Default Location -> Trento, city centre
+ */
 wwd.navigator.lookAtLocation.latitude = 46.06686259487552;
 wwd.navigator.lookAtLocation.longitude = 11.120719683053174;
-
 wwd.navigator.range = 170.55557907761514;
 wwd.navigator.tilt = 61;
+
+/*
+ Apply
+ */
 wwd.redraw();
 
+
+/*
+Import
+ */
 $.getScript("buildGeometries.js", function(){
     console.log("Script buildGeometries.js loaded");
 });
@@ -60,31 +130,39 @@ $.getScript("optionPanelFeatures.js", function(){
     enableOptionPanel()
 });
 
-//Vars
+/*
+ Internal use variables
+ */
 var oldTiles = 0;
 var currentLayer = osmLayer;
-var lastRedraw = 0;
 var db = [];
 var activeTiles = [];
-
 var geomList = [];
+var lastRedraw = 0;
+var redrawThreshold = 800;
+var POLYGON = 0, LINE = 1;
+var highlightPolygons = [];
 
-//options
+/*
+ Settings options status
+ */
 var drawOutlineFlag = true;
 var extrudeFlag = true;
 var tiledRoofFlag = true;
 
-var lastRedraw = 0;
-var redrawThreshold = 800;
-
-var POLYGON = 0, LINE = 1;
-var highlightPolygons = [];
-
+/*
+ Categories enabled by default
+ */
 var types = {polygonList: [], polygonEnabled: [36, 4, 1, 32, 33, 17, 34, 35, 14], lineList: [], lineEnabled: []};
 
-var filter = function() {
 
-    console.log("filter");
+/**
+ * Filter by category
+ */
+var filter = function() {
+    /**
+     * Internal use
+     */
     var updateSelectedTypes = function(){
         $("#selectedPolygons").empty();
         types.polygonList.forEach(function(entry){
@@ -101,6 +179,9 @@ var filter = function() {
         });
     }
 
+    /**
+     * Internal use
+     */
     var redraw = function(){
         shapesLayer.removeAllRenderables();
 
@@ -146,8 +227,15 @@ var filter = function() {
     redraw();
 }
 
+/**
+ * Enable the description panel, filling it with the geometry's properties
+ * @param osmId Identifier of the Geometry
+ */
 var showDescriptionPanel = function(osmId){
 
+    /**
+     * Internal use
+     */
     var excludeField = function(field){
         var toExclude = ['modified_on','z_order', 'way_area', 'is_deleted', 'color_fill', 'color_border', 'line_width']
         for (var i in toExclude){
@@ -185,16 +273,25 @@ var showDescriptionPanel = function(osmId){
     }
 }
 
+/**
+ * Render a polygon
+ * @param entry Polygon object
+ */
 var renderPolygon = function(entry){
     entry.visible = true;
-
     entry._attributes._drawOutline = drawOutlineFlag;
-
     shapesLayer.addRenderable(entry);
 }
 
+/**
+ * Render the enabled geometries of the provided tile
+ * @param tile Tile object
+ */
 var drawTile = function(tile){
 
+    /**
+     * Internal use
+     */
     var isGeomEnabled = function(entity, typeId){
         var list = undefined;
 
@@ -219,15 +316,15 @@ var drawTile = function(tile){
         buildGeometries(tile, tile.draw.polygons, tile.draw.lines, tile.geometries, false);
     }
 
+    /**
+     * Internal use
+     */
     var isHighlighted = function(id){
-
         for (var i in highlightPolygons){
             if (parseInt(highlightPolygons[i].osmid) === parseInt(id)){
-                //console.log("Trovato!!!!!");
                 return true;
             }
         }
-
         return false;
     }
 
@@ -252,26 +349,36 @@ var drawTile = function(tile){
 
 }
 
+/**
+ * Internal use
+ */
 var redrawEvent = function(){
-    //console.log("redraw");
     setTimeout(function() {
         redrawEvent_aux();
 
     }, 0);
-
-
 }
 
-
-
+/**
+ * Internal use
+ */
 var redrawEvent_aux = function(){
 
+    /**
+     * Internal use
+     */
     var refreshTiles = function(){
 
+        /**
+         * Internal use
+         */
         var storeTile = function(tile){
             db.push(tile);
         }
 
+        /**
+         * Internal use
+         */
         var getTileFromServer = function(tile){
 
             var request = {
@@ -299,19 +406,27 @@ var redrawEvent_aux = function(){
         }
 
 
-
-        var doIt = function(tile){
+        /**
+         * Internal use
+         */
+        var fun_a = function(tile){
             drawTile(tile);
             activeTiles.push(tile);
-            do3();
+            fun_b();
         }
 
+        /**
+         * Internal use
+         */
         var do1 = function(tile){
             storeTile(tile);
-            doIt(tile);
+            fun_a(tile);
         }
 
-        var do3 = function(){
+        /**
+         * Internal use
+         */
+        var fun_b = function(){
             for (var j in activeTiles){
                 var found = false;
                 for (var i in currentLayer.currentTiles){
@@ -328,6 +443,9 @@ var redrawEvent_aux = function(){
             }
         }
 
+        /**
+         * Internal use
+         */
         var getTile = function(tile) {
             var found = false;
 
@@ -340,14 +458,15 @@ var redrawEvent_aux = function(){
             }
 
             if (found){
-                doIt(tile);
+                fun_a(tile);
             } else {
                 getTileFromServer(tile);
-                //storeTile(tile);
-                //return tile;
             }
         }
 
+        /**
+         * Internal use
+         */
         var isTileActive = function(tile){
             for (var i in activeTiles){
                 if (activeTiles[i].tileKey === tile.tileKey){
@@ -358,6 +477,9 @@ var redrawEvent_aux = function(){
             return false;
         }
 
+        /**
+         * Internal use
+         */
         var eraseTile = function(tile){
             if (tile.draw){
                 tile.draw.polygons.forEach(function (entry){
@@ -372,17 +494,12 @@ var redrawEvent_aux = function(){
 
         var tile = undefined;
 
-        var do2 = function(tile){
-            drawTile(tile);
-            activeTiles.push(tile);
-        }
 
         for (var i in currentLayer.currentTiles){
             tile = currentLayer.currentTiles[i];
 
-
             if (isTileActive(tile)) {
-                do3();
+                fun_b();
             } else {
                 getTile(tile);
             }
@@ -390,6 +507,9 @@ var redrawEvent_aux = function(){
         }
     }
 
+    /**
+     * Internal use
+     */
     var checkTiles = function(){
 
         var currentTime = new Date().getTime();
@@ -415,9 +535,10 @@ var redrawEvent_aux = function(){
 }
 
 
+/**
+ * Fire the Redraw Event in order to redraw the OSM geometries if it is necessary
+ */
 canvas.addEventListener(WorldWind.REDRAW_EVENT_TYPE, function(){
-
-
     setTimeout(function() {
         redrawEvent_aux();
 

@@ -1,8 +1,12 @@
 /**
- * @author
+ * @author Trilogis Srl
+ * @author Gustavo German Soria
  */
-//settings fields
 
+
+/**
+ * Enable the Settings Panel
+ */
 var enableSettings = function (){
 
     var enableSettingsField = function(id){
@@ -49,25 +53,19 @@ var enableSettings = function (){
     }
 
     var handleExtrusionOption = function(enable){
-        console.log("handleExtrusionOption");
         if (enable){
             extrudeFlag = true;
         } else {
             extrudeFlag = false;
         }
-        console.log("extrudeFlag");
         shapesLayer.removeAllRenderables();
 
-        //i poligoni devono essere rifatti
-        //TODO creare un metodo che rifà solo i poligoni
         db.forEach(function(tile){
             tile.draw = undefined;
         });
 
         filter();
     }
-
-//
 
     var layerBingAction = function(){
         enableSettingsField('layer_bing');
@@ -78,14 +76,10 @@ var enableSettings = function (){
         }
 
         wwd.redraw();
-
-        //console.log(bingAerialWithLabelsLayer.enabled);
     }
 
     var layer_bingButton =  document.getElementById("layer_bing");
     layer_bingButton.onclick = layerBingAction;
-
-//
 
     var fun_outlineAction = function(){
         enableSettingsField('fun_outline');
@@ -96,8 +90,6 @@ var enableSettings = function (){
     fun_outlineButton.onclick = fun_outlineAction;
 
 
-//
-
     var layer_bmng_landsatAction = function(){
         enableSettingsField('layer_bmng_landsat');
         if (isSettingFieldEnabled('layer_bmng_landsat')){
@@ -105,16 +97,11 @@ var enableSettings = function (){
         } else {
             bmngLandsatLayer.enabled = false;
         }
-
         wwd.redraw();
-
-        //console.log(bmngLandsatLayer.enabled);
     }
 
     var layer_bmng_landsatButton =  document.getElementById("layer_bmng_landsat");
     layer_bmng_landsatButton.onclick = layer_bmng_landsatAction;
-
-//
 
     var layer_compassAction = function() {
         enableSettingsField('layer_compass');
@@ -125,23 +112,10 @@ var enableSettings = function (){
         }
 
         wwd.redraw();
-
-        //console.log(compassLayer.enabled);
     }
 
     var layer_compassButton =  document.getElementById("layer_compass");
     layer_compassButton.onclick = layer_compassAction;
-
-//
-
-    //var fun_highlightAction = function(){
-    //    enableSettingsField('fun_highlight');
-    //}
-    //
-    //var fun_highlightButton =  document.getElementById("fun_highlight");
-    //fun_highlightButton.onclick = fun_highlightAction;
-
-//
 
     var fun_tiled_roofsAction = function(){
         enableSettingsField('fun_tiled_roofs');
@@ -151,8 +125,6 @@ var enableSettings = function (){
 
     var fun_tiled_roofsButton =  document.getElementById("fun_tiled_roofs");
     fun_tiled_roofsButton.onclick = fun_tiled_roofsAction;
-
-//
 
     var fun_extrusion_Action = function(){
         enableSettingsField('fun_extrusion');

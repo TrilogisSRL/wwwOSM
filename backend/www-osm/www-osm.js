@@ -36,7 +36,4 @@ searchServices.start(router);
 sourceServices.start(router);
 styleServices.start(router);
 importServices.start(router);
-//bboxServices.start(router);
-//relationServices.start(router);
-
 console.log ("server is ready :)");

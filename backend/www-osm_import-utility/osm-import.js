@@ -69,15 +69,11 @@ var GIS = params.GIS;
 var TEMP = params.TEMP;
 
 var getNames = function(callback){
-    console.log("getNames");
-//    var query = "SELECT osm_id, name FROM planet_osm_line WHERE name IS NOT NULL";
     database.execute(GIS, nameQueries.getNames(callback), [], callback);
 }
 
 
 var storeNames = function(callback){
-    console.log("storeNames: "+current);
-    //console.log(callback.rows.length);
     if (callback.rows.length === 0){
         callback.list_next = callback.list;
         afterCreate(callback);
@@ -85,7 +81,6 @@ var storeNames = function(callback){
     for (var i in callback.rows) {
         var obj = callback.rows[i];
         if (obj.name) {
-            //console.log(obj.name);
             var _nameArray = obj.name.split(" ");
 
             counter += _nameArray.length;
@@ -128,21 +123,14 @@ var applyProperties = function(callback){
         if (entry.type_id >1) {
             var query = queries.applyTypeIdPartialQuery(callback, entry.type_key, entry.type_id, entry.type_value);
             queryList.push(query);
-            //var params = [entry.type_id, entry.type_value];
-            //database.execute(TEMP, query, params, undefined);
         }
     });
-
-    //var queryTimestamp = queries.setTimestamp(callback, new Date().toISOString());
-    //queryList.push(queryTimestamp);
 
 
     var transaction = "";
     queryList.forEach(function(entry){
         transaction +=entry;
     });
-
-    //console.log(transaction);
 
     database.execute(TEMP, queries.updateData(transaction), [], undefined);
 
@@ -187,7 +175,6 @@ var hardDeleteRecords = function(callback) {
  * @param callback Callback object in which is stored the entity type used to select the correct table
  */
 var getProperties = function(callback){
-    //console.log("getProperties");
     /*
     query execution
      */
@@ -240,7 +227,6 @@ var afterCreate = function(callback){
     /*
     check the counter validity
      */
-    console.log(">>>>>"+counter);
     if (counter >= 0){
 
 
@@ -254,14 +240,10 @@ var afterCreate = function(callback){
         when the counter reaches  zero, then workflow for the current entity ends.
          */
         if (counter <= 0){
-            //console.log("minore o uguale a zero: "+counter);
-            console.log("FINE PER: "+current);
-
             callback.list = callback.list_next;
             cbu.next(callback,"error 009");
         }
     }
-    //console.log(counter);
 }
 
 /**
@@ -276,8 +258,6 @@ var endEntity = function(){
  * process starts with the first call
  */
 var startProcess = function(){
-    console.log("startProcess");
-
     /**
      * Callback object init
      * @type {{params: {type: number}, list: Array}} It contains the identified of the current entity type
@@ -299,12 +279,9 @@ var startProcess = function(){
     workflow
      */
     callback.list.push(endEntity);
-    //callback.list.push(softDeleteRecords);
     callback.list.push(applyProperties);
     callback.list.push(getProperties_aux);
     callback.list.push(getProperties);
-
-    //setTable(callback);
 
     getProperties(callback);
 }
@@ -351,7 +328,6 @@ var init = function(){
         /*
         otherwise the process has been completed for all the entities. At this point the program ends.
          */
-        //moveRows();
         log.end();
     }
 }
@@ -369,8 +345,6 @@ var applyTimestamp = function(){
 var updateNames = function(){
 
     counter = 0;
-    console.log("updateNames "+current);
-    //console.log("updateNames");
 
     if (current === undefined){
         current = 1;
@@ -384,7 +358,6 @@ var updateNames = function(){
         getNames(callback);
     } else {
         current++;
-        console.log(current+"/"+params.types.length);
         if (current < params.types.length){
             var callback = {
                 params : {
@@ -411,7 +384,6 @@ var reindexTables = function () {
 }
 
 var applySoftDelete = function () {
-    console.log("applySoftDelete");
     var callback = {
         params : {
             type : current
@@ -422,7 +394,6 @@ var applySoftDelete = function () {
 }
 
 var applyHardDelete = function () {
-    console.log("applyHardDelete");
     var callback = {
         params : {
             type : current
@@ -453,34 +424,20 @@ var updateTable = function(){
 }
 
 var runAll = function(){
-    //var exec = require('child_process').exec;
-    //exec('./import.sh ~/Desktop/sernaglia.xml', function (error, stdout, stderr) {
-    //    console.log(stdout);
-    //});
-
-
     var spawn = require('child_process').spawn;
-    //var child = spawn('./test.sh', []);
     var child = spawn('./import.sh', ['/Users/gustavosoria/Desktop/sernaglia.xml']);
 
     child.stdout.on('data', function(data) {
-        //console.log("log");
         console.log(decodeURI(data));
     });
 
     child.stderr.on('data', function (data) {
-        //console.log("err ----");
         try {
             console.log(decodeURI(data));
         } catch (ex){
             console.log("Processing...");
         }
-
-        //console.log("----");
     });
-    //child.stdout.on('end', function() {
-    //    console.log("end");
-    //});
 }
 
 var test = function () {

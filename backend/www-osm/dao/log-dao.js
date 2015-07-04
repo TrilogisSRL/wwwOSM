@@ -2,11 +2,11 @@
  * @author Trilogis Srl
  * @author Gustavo German Soria
  *
- * Search DAO
+ * Log DAO
  */
 
 /**
- * Import of the search-dao-queries module
+ * Import of the log-dao-queries module
  * @type {exports}
  */
 var queries = require('./../queries/log-dao-queries.js');
@@ -18,28 +18,45 @@ var queries = require('./../queries/log-dao-queries.js');
 var database = require('./../db/db.js');
 
 
+/**
+ * Create a new log record into the database and returns its ID
+ * @param callback Callback Object
+ */
 var createLog = function(callback){
     /*
-     query execution
+    Query execution
      */
     database.execute(queries.createLog(), [new Date().toISOString()], callback);
 }
 
+/**
+ * Create a new record related to a log entity
+ * @param logId Identifier of the Log entity
+ * @param logValue Value to associate
+ */
 var createLogDetail = function(logId, logValue){
 
+    /*
+    Query parameters
+     */
     var params = [logId, logValue, new Date().toISOString()];
-    //console.log(params);
 
     /*
-     query execution
+    Query execution
      */
     database.execute(queries.createLogDetail(), params, {});
 }
 
+/**
+ * Retrieve all the values related with the provided Log identifier
+ * @param callback
+ */
 var getLogDetails = function(callback){
 
+    /*
+     Query parameters
+     */
     var params = [parseInt(callback.log.logId)];
-    //console.log(params);
     /*
      query execution
      */

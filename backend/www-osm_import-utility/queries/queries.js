@@ -339,20 +339,12 @@ var moveRows = function(){
     // * Table name. It is retrieved from the entity type identifier stored in the callback object
     // * @type {String} the table name
     // */
-    //var mainTable = getMainTable(callback);
-    //
-    ///**
-    // * Table name. It is retrieved from the entity type identifier stored in the callback object
-    // * @type {String} the table name
-    // */
-    //var tempTable = getTempTable(callback);
     var query = "BEGIN;" +
         "INSERT INTO "+polygon.model.mainTable+" SELECT * FROM "+polygon.model.tempTable+";" +
         "INSERT INTO "+line.model.mainTable+" SELECT * FROM "+line.model.tempTable+";" +
         "INSERT INTO "+road.model.mainTable+" SELECT * FROM "+road.model.tempTable+";" +
         "INSERT INTO "+point.model.mainTable+" SELECT * FROM "+point.model.tempTable+";" +
         "COMMIT;";
-    //console.log(query);
     return query;
 }
 
@@ -362,7 +354,6 @@ var moveRows = function(){
  * @returns {string} the query string
  */
 var setTable = function(){
-    //console.log("setTable");
     /**
      * Table name. It is retrieved from the entity type identifier stored in the callback object
      * @type {String} the table name
@@ -385,7 +376,6 @@ var setTable = function(){
         "ALTER TABLE "+point.model.tempTable+" ADD modified_on timestamp; " +
 
         "COMMIT;";
-    //console.log(query);
     return query;
 }
 
@@ -399,12 +389,10 @@ var reindexTables = function () {
         "REINDEX TABLE "+road.model.mainTable +";"+
         "REINDEX TABLE "+point.model.mainTable +";";
 
-    //console.log(query);
     return query;
 }
 
 var setTimestamp = function(timestamp){
-    //var tempTable = getTempTable(callback);
 
     var query = "BEGIN;" +
         'UPDATE '+polygon.model.tempTable+' SET modified_on = \''+timestamp+'\';' +
@@ -412,8 +400,6 @@ var setTimestamp = function(timestamp){
         'UPDATE '+road.model.tempTable+' SET modified_on = \''+timestamp+'\';' +
         'UPDATE '+point.model.tempTable+' SET modified_on = \''+timestamp+'\';' +
         "COMMIT;";
-    //console.log(query);
-
     return  query;
 }
 

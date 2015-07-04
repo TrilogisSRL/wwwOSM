@@ -12,7 +12,10 @@ var styleDAO = require('./../dao/styles-dao.js');
  */
 var responseUtil = require('./../services_util/response.js');
 
-//PUBLIC METHODS
+/**
+ * Web services for the Import process
+ * @param router
+ */
 function listen (router){
 
     router.get('/styles/polygon', function(request, response) {
@@ -49,11 +52,9 @@ function listen (router){
     });
 
     router.post('/styles/polygon', function(request, response) {
-        console.log(request.post);
         var style = request.post;
 
         if (!(style.lod && style.elevation && style.typeId && style.fillColor && style.borderColor)){
-            console.log("style not valid");
             return;
         }
 
@@ -95,11 +96,9 @@ function listen (router){
 
 
     router.post('/styles/line', function(request, response) {
-        console.log(request.post);
         var style = request.post;
 
         if (!(style.lod && style.typeId && style.fillColor)){
-            console.log("style not valid");
             return;
         }
 
@@ -113,13 +112,6 @@ function listen (router){
         };
         styleDAO.updateLineStyle(_callback);
     });
-    //
-    //router.get('/import', function(request, response) {
-    //    console.log("IMPORT")
-    //});
-
-
-
 }
 
 exports.start = listen;

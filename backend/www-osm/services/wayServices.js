@@ -23,8 +23,10 @@ var boundaryBuilder = require('./../util/boundary.js');
  */
 var responseUtil = require('./../services_util/response.js');
 
-var Quadkey = require('quadkeytools');
-
+/**
+ * Web services for the Import process
+ * @param router
+ */
 function listen (router){
 
     /*
@@ -62,7 +64,6 @@ function listen (router){
 
     router.post('/polyline/by_name', function(request, response) {
         var name = request.post.name;
-        console.log(name);
         var _callback =
         {
             parameter   :   response,
@@ -86,22 +87,11 @@ function listen (router){
         var excludePolygons = [];
         var excludeLines = [];
 
-        console.log(request.post);
-
         var _bbox = boundaryBuilder.build(
             minLatitude,
             maxLatitude,
             minLongitude,
             maxLongitude);
-
-
-//        if (lod === 9){
-//            lod = 15;
-//        } else if (lod === 8){
-//            lod = 12;
-//        } else if (lod === 7){
-//            lod = 10;
-//        }
 
         var _callback =
         {
@@ -120,28 +110,28 @@ function listen (router){
         wayDao.getPolygonsByBbox(_callback);
     });
 
-    router.get('/bboxtest', function(request, response) {
-
-        var _bbox = boundaryBuilder.build(
-            46.05878,
-            46.07578,
-            11.11473,
-            11.13273);
-
-        var _callback =
-        {
-            lod             :    18,
-            bbox            :    _bbox,
-            parameter       :   response,
-            list            :
-                [   responseUtil.print,
-                    wayDao.getPolylinesByBbox,
-                    responseUtil.print
-                ]
-        };
-
-        wayDao.getPolygonsByBbox(_callback);
-    });
+    //router.get('/bboxtest', function(request, response) {
+    //
+    //    var _bbox = boundaryBuilder.build(
+    //        46.05878,
+    //        46.07578,
+    //        11.11473,
+    //        11.13273);
+    //
+    //    var _callback =
+    //    {
+    //        lod             :    18,
+    //        bbox            :    _bbox,
+    //        parameter       :   response,
+    //        list            :
+    //            [   responseUtil.print,
+    //                wayDao.getPolylinesByBbox,
+    //                responseUtil.print
+    //            ]
+    //    };
+    //
+    //    wayDao.getPolygonsByBbox(_callback);
+    //});
 
 
 }

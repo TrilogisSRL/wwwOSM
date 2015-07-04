@@ -23,13 +23,22 @@ var database = require('./../db/db.js');
  */
 var val = require('./../util/validator.js');
 
+/**
+ * Retrieve a list of all Sources
+ * @param callback callback object
+ */
 var getSources = function(callback){
+
     /*
      query execution
      */
     database.execute(queries.getSources(), [], callback);
 }
 
+/**
+ * Store a new record of a Source entity into the database
+ * @param callback callback object
+ */
 var addSource = function(callback){
     /*
      initialization of the parameters for the parametrized query
@@ -42,6 +51,10 @@ var addSource = function(callback){
     database.execute(queries.addSource(), _params, callback);
 }
 
+/**
+ * Retrieve the Source object with the provided identifier [callback.source.sourceId]
+ * @param callback callback object
+ */
 var getSourceById = function(callback){
     /*
      initialization of the parameters for the parametrized query
@@ -54,6 +67,10 @@ var getSourceById = function(callback){
     database.execute(queries.getSourceById(), _params, callback);
 }
 
+/**
+ * Update the last import value of a source object
+ * @param callback callback object
+ */
 var updateLastImport = function(callback){
     /*
      initialization of the parameters for the parametrized query
@@ -66,19 +83,20 @@ var updateLastImport = function(callback){
     database.execute(queries.updateLastImport(), _params, callback);
 }
 
+/**
+ * Update the log id of the last import of the source object with the provided identifier
+ * @param callback callback object
+ */
 var updateLastLogId = function(callback){
-    console.log("updateLastLogId");
-    //console.log(callback);
+
+    /*
+    validation
+     */
     if (callback && callback.log) {
-        console.log(callback.log);
-        console.log(callback.source);
         /*
          initialization of the parameters for the parametrized query
          */
         var _params = [callback.log.log_id, callback.source.source_id];
-
-        console.log(_params);
-        console.log(queries.updateLastLogId());
 
         /*
          query execution

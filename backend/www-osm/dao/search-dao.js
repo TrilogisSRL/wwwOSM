@@ -24,7 +24,7 @@ var database = require('./../db/db.js');
 var val = require('./../util/validator.js');
 
 /**
- * It searches over the name value contained in the callback object
+ * Search the geometries which contain the name value contained in the callback object
  * @param callback Callback object
  */
 var getByPartialName = function(callback){

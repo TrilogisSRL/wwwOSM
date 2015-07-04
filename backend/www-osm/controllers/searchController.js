@@ -18,24 +18,25 @@ var searchDao = require('./../dao/search-dao.js');
 var val = require('./../util/validator.js');
 
 /**
- * It starts the search process over the name value contained in the callback object
+ * It initiates the search process over the name value contained in the callback object
  *
  * @param callback Callback object
  */
 var getByPartialName = function(callback) {
 
     /*
-     it validates the name value
+    Validation of name value
      */
     val.assertNotUndefined(callback.name);
 
     /*
-    the search process uses partial matches in which only the left side of the word is fixed
+    The search process works with partial matches.
+    Only the left side of the word is fixed
      */
     callback.name += '%';
 
     /*
-    execute
+    Execute query
      */
     searchDao.getByPartialName(callback);
 }

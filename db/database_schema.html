@@ -1,0 +1,2289 @@
+<html>
+<head><meta http-equiv="content-type" content="text/html; charset=UTF-8"></head>
+<body>
+<h5 align="right" style="color: gray; ">Snapshot on 2015-07-04 20:07:41</h5>
+<h3>Schema: public</h3>
+<br>
+<h4>log</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>log_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>No</td>
+	<td width=20%>nextval('log_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width=35%>log_start</td>
+	<td width=30%>timestamp(6)</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>spatial_ref_sys</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>srid</td>
+	<td width=30%>int4</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>auth_name</td>
+	<td width=30%>varchar(256)</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>auth_srid</td>
+	<td width=30%>int4</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>srtext</td>
+	<td width=30%>varchar(2048)</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>proj4text</td>
+	<td width=30%>varchar(2048)</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>log_details</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>log_parent</td>
+	<td width=30%>int8</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>log_value</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>log_printed_on</td>
+	<td width=30%>timestamp(6)</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>osm_roads</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>osm_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>access</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>addr:housename</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>addr:housenumber</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>addr:interpolation</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>admin_level</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>aerialway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>aeroway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>amenity</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>area</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>barrier</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>bicycle</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>brand</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>bridge</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>boundary</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>building</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>construction</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>covered</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>culvert</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>cutting</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>denomination</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>disused</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>embankment</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>foot</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>generator:source</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>harbour</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>highway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>historic</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>horse</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>intermittent</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>junction</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>landuse</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>layer</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>leisure</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>lock</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>man_made</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>military</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>motorcar</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>name</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>natural</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>office</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>oneway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>operator</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>place</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>population</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>power</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>power_source</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>public_transport</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>railway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>ref</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>religion</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>route</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>service</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>shop</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>sport</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>surface</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>toll</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>tourism</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>tower:type</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>tracktype</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>tunnel</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>water</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>waterway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>wetland</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>width</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>wood</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>z_order</td>
+	<td width=30%>int4</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>way_area</td>
+	<td width=30%>float4</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>way</td>
+	<td width=30%>"public"."geometry"</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>type_id</td>
+	<td width=30%>int4</td>
+	<td width=15%>No</td>
+	<td width=20%>1</td>
+</tr>
+<tr>
+	<td width=35%>is_deleted</td>
+	<td width=30%>bool</td>
+	<td width=15%>No</td>
+	<td width=20%>false</td>
+</tr>
+<tr>
+	<td width=35%>modified_on</td>
+	<td width=30%>timestamp(6)</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>osm_point</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>osm_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>access</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>addr:housename</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>addr:housenumber</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>addr:interpolation</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>admin_level</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>aerialway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>aeroway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>amenity</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>area</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>barrier</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>bicycle</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>brand</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>bridge</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>boundary</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>building</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>capital</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>construction</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>covered</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>culvert</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>cutting</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>denomination</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>disused</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>ele</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>embankment</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>foot</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>generator:source</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>harbour</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>highway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>historic</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>horse</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>intermittent</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>junction</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>landuse</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>layer</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>leisure</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>lock</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>man_made</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>military</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>motorcar</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>name</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>natural</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>office</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>oneway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>operator</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>place</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>poi</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>population</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>power</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>power_source</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>public_transport</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>railway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>ref</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>religion</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>route</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>service</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>shop</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>sport</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>surface</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>toll</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>tourism</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>tower:type</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>tunnel</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>water</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>waterway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>wetland</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>width</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>wood</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>z_order</td>
+	<td width=30%>int4</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>way</td>
+	<td width=30%>"public"."geometry"</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>type_id</td>
+	<td width=30%>int4</td>
+	<td width=15%>No</td>
+	<td width=20%>1</td>
+</tr>
+<tr>
+	<td width=35%>is_deleted</td>
+	<td width=30%>bool</td>
+	<td width=15%>No</td>
+	<td width=20%>false</td>
+</tr>
+<tr>
+	<td width=35%>modified_on</td>
+	<td width=30%>timestamp(6)</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>osm_polygon</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>osm_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>access</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>addr:housename</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>addr:housenumber</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>addr:interpolation</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>admin_level</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>aerialway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>aeroway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>amenity</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>area</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>barrier</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>bicycle</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>brand</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>bridge</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>boundary</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>building</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>construction</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>covered</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>culvert</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>cutting</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>denomination</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>disused</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>embankment</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>foot</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>generator:source</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>harbour</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>highway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>historic</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>horse</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>intermittent</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>junction</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>landuse</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>layer</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>leisure</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>lock</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>man_made</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>military</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>motorcar</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>name</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>natural</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>office</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>oneway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>operator</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>place</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>population</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>power</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>power_source</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>public_transport</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>railway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>ref</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>religion</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>route</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>service</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>shop</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>sport</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>surface</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>toll</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>tourism</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>tower:type</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>tracktype</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>tunnel</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>water</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>waterway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>wetland</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>width</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>wood</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>z_order</td>
+	<td width=30%>int4</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>way_area</td>
+	<td width=30%>float4</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>way</td>
+	<td width=30%>"public"."geometry"</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>type_id</td>
+	<td width=30%>int4</td>
+	<td width=15%>No</td>
+	<td width=20%>1</td>
+</tr>
+<tr>
+	<td width=35%>is_deleted</td>
+	<td width=30%>bool</td>
+	<td width=15%>No</td>
+	<td width=20%>false</td>
+</tr>
+<tr>
+	<td width=35%>modified_on</td>
+	<td width=30%>timestamp(6)</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>polygon_style_properties</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>type_id</td>
+	<td width=30%>int4</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>type_key</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>type_value</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>color_fill</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>color_border</td>
+	<td width=30%>varchar</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>lod</td>
+	<td width=30%>int4</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>line_width</td>
+	<td width=30%>float4</td>
+	<td width=15%>No</td>
+	<td width=20%>0.5</td>
+</tr>
+<tr>
+	<td width=35%>elevation</td>
+	<td width=30%>float4</td>
+	<td width=15%>No</td>
+	<td width=20%>5</td>
+</tr>
+</table>
+<br>
+<h4>sources</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>source_id</td>
+	<td width=30%>int4</td>
+	<td width=15%>No</td>
+	<td width=20%>nextval('sources_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width=35%>source_url</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>source_filename</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>insert_on</td>
+	<td width=30%>timestamp(6)</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>modified_on</td>
+	<td width=30%>timestamp(6)</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>last_import</td>
+	<td width=30%>timestamp(6)</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>last_log_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>roads_style_properties</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>type_id</td>
+	<td width=30%>int4</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>type_key</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>type_value</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>color_fill</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>lod</td>
+	<td width=30%>int4</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>line_width</td>
+	<td width=30%>float4</td>
+	<td width=15%>No</td>
+	<td width=20%>0.5</td>
+</tr>
+</table>
+<br>
+<h4>line_style_properties</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>type_id</td>
+	<td width=30%>int4</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>type_key</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>type_value</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>color_fill</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>lod</td>
+	<td width=30%>int4</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>line_width</td>
+	<td width=30%>float4</td>
+	<td width=15%>No</td>
+	<td width=20%>0.5</td>
+</tr>
+</table>
+<br>
+<h4>road_names</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>name_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>No</td>
+	<td width=20%>nextval('road_name_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width=35%>name</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>road_names_rel</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>osm_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>name_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>line_names</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>name_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>No</td>
+	<td width=20%>nextval('line_names_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width=35%>name</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>line_names_rel</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>osm_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>name_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>polygon_names</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>name_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>No</td>
+	<td width=20%>nextval('polygon_names_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width=35%>name</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>polygon_names_rel</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>osm_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>name_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>point_names</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>name_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>No</td>
+	<td width=20%>nextval('point_names_id_seq'::regclass)</td>
+</tr>
+<tr>
+	<td width=35%>name</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>point_names_rel</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>osm_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>name_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>point_style_properties</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>type_id</td>
+	<td width=30%>int4</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>type_key</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>type_value</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>color_fill</td>
+	<td width=30%>varchar</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>lod</td>
+	<td width=30%>int4</td>
+	<td width=15%>No</td>
+	<td width=20%></td>
+</tr>
+</table>
+<br>
+<h4>osm_line</h4>
+<table border=1 width=75%>
+<tr>
+	<th width=35%>Field</th>
+	<th width=30%>Type</th>
+	<th width=15%>Allow Null</th>
+	<th width=20%>Default Value</th>
+</tr>
+<tr>
+	<td width=35%>osm_id</td>
+	<td width=30%>int8</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>access</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>addr:housename</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>addr:housenumber</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>addr:interpolation</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>admin_level</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>aerialway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>aeroway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>amenity</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>area</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>barrier</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>bicycle</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>brand</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>bridge</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>boundary</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>building</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>construction</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>covered</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>culvert</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>cutting</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>denomination</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>disused</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>embankment</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>foot</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>generator:source</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>harbour</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>highway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>historic</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>horse</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>intermittent</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>junction</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>landuse</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>layer</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>leisure</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>lock</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>man_made</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>military</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>motorcar</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>name</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>natural</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>office</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>oneway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>operator</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>place</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>population</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>power</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>power_source</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>public_transport</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>railway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>ref</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>religion</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>route</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>service</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>shop</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>sport</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>surface</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>toll</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>tourism</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>tower:type</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>tracktype</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>tunnel</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>water</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>waterway</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>wetland</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>width</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>wood</td>
+	<td width=30%>text</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>z_order</td>
+	<td width=30%>int4</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>way_area</td>
+	<td width=30%>float4</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>way</td>
+	<td width=30%>"public"."geometry"</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+<tr>
+	<td width=35%>type_id</td>
+	<td width=30%>int4</td>
+	<td width=15%>No</td>
+	<td width=20%>1</td>
+</tr>
+<tr>
+	<td width=35%>is_deleted</td>
+	<td width=30%>bool</td>
+	<td width=15%>No</td>
+	<td width=20%>false</td>
+</tr>
+<tr>
+	<td width=35%>modified_on</td>
+	<td width=30%>timestamp(6)</td>
+	<td width=15%>Yes</td>
+	<td width=20%></td>
+</tr>
+</table>
+</body>
+</html>
