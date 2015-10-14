@@ -3,7 +3,7 @@
  * @author Gustavo German Soria
  *
  */
-var buildGeometries = function(tile, polygonList, lineList, geometries, searchResult) {
+var buildGeometries = function(tile, polygonList, lineList, pointList, geometries, searchResult) {
 
 
     //color
@@ -107,7 +107,19 @@ var buildGeometries = function(tile, polygonList, lineList, geometries, searchRe
         });
     }
 
+    var updatePointList = function(){
+        $("#pointList").empty();
+        types.pointList.forEach(function(entry){
+            $("#pointList").append('<a id="point'+entry.typeId+'" onclick="return select(this.id);" class="list-group-item">'+entry.typeKey+' - '+entry.typeValue+'</a>');
+
+            if (entry.enabled){
+                $('#'+'point'+entry.typeId).addClass('active');
+            }
+        });
+    }
+
     var addType = function(entity, type) {
+        //console.log("entity: "+entity);
         var addTypeSelection = function(entity, type){
             var div = undefined;
             var id = undefined;
@@ -130,6 +142,8 @@ var buildGeometries = function(tile, polygonList, lineList, geometries, searchRe
             list = types.polygonList;
         } else if (entity === LINE) {
             list = types.lineList;
+        } else {
+            list = types.pointList;
         }
 
         if (list){
@@ -149,10 +163,14 @@ var buildGeometries = function(tile, polygonList, lineList, geometries, searchRe
 
 
                 if (entity === POLYGON) {
+                    //console.log("update polygonList");
                     updatePolygonList();
                 } else if (entity === LINE) {
-                    console.log(list);
+                    //console.log("update lineList");
                     updatePolylineList();
+                } else {
+                    //console.log("update pointList");
+                    updatePointList();
                 }
             }
         }
@@ -161,6 +179,26 @@ var buildGeometries = function(tile, polygonList, lineList, geometries, searchRe
     var createType = function(typeId, typeKey, typeValue, enabled){
         return {typeId: typeId, typeKey: typeKey, typeValue: typeValue, enabled: enabled};
     }
+
+    var  // location of the image files
+        placemark,
+        placemarkAttributes = new WorldWind.PlacemarkAttributes(null),
+        highlightAttributes;
+
+
+    // Set up the common placemark attributes.
+    placemarkAttributes.imageScale = 1;
+    placemarkAttributes.imageOffset = new WorldWind.Offset(
+        WorldWind.OFFSET_FRACTION, 0.3,
+        WorldWind.OFFSET_FRACTION, 0.0);
+    placemarkAttributes.imageColor = WorldWind.Color.WHITE;
+    placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
+        WorldWind.OFFSET_FRACTION, 0.5,
+        WorldWind.OFFSET_FRACTION, 2.0);
+    placemarkAttributes.labelAttributes.color = WorldWind.Color.YELLOW;
+    placemarkAttributes.drawLeaderLine = true;
+    placemarkAttributes.leaderLineAttributes.outlineColor = WorldWind.Color.RED;
+
 
 
     for (var k in geometries){
@@ -229,15 +267,19 @@ var buildGeometries = function(tile, polygonList, lineList, geometries, searchRe
                     var polygonAttributes = new WorldWind.ShapeAttributes(null);
 
 
-                    if (tiledRoofFlag && tile && entry.properties.type_key === 'building'){
+                    if (tiledRoofFlag && ((tile && entry.properties.type_key === 'building')
+                        //| entry.properties.type_key === 'waterway' | (entry.properties.type_key === 'landuse')
+                        )){
                         polygon.textureCoordinates = [vertices];
-                        var imgUrl = "http://ecn.t3.tiles.virtualearth.net/tiles/a"+calcQuadKey(tile.level.levelNumber, tile.row, tile.column)+".jpeg?g=3517&mkt={culture}";
-                        polygonAttributes.imageSource = imgUrl;
-                    }
+                        var imgUrl;
+                        if ( entry.properties.type_key === 'waterway'){
+                            imgUrl = "http://freetextures.dynamic-softworks.com/textures/water-caustic/tex03.jpg";
+                        } else {
+                            imgUrl = "http://ecn.t3.tiles.virtualearth.net/tiles/a"+calcQuadKey(tile.level.levelNumber, tile.row, tile.column)+".jpeg?g=3517&mkt={culture}";
+                        }
 
-                    polygonAttributes.drawInterior = true;
-                    polygonAttributes.drawOutline = drawOutlineFlag;
-                    polygonAttributes.drawVerticals = polygon.extrude;
+                        polygonAttributes.imageSource = [imgUrl, null];
+                    }
 
                     var alphaOut = 0.6;
                     var alphaInt = 1;
@@ -285,9 +327,15 @@ var buildGeometries = function(tile, polygonList, lineList, geometries, searchRe
                         }
                     }
 
-                    polygonAttributes.outlineColor = new WorldWind.Color(hexToR(entry.properties.color_border) / 255, hexToG(entry.properties.color_border) / 255, hexToB(entry.properties.color_border) / 255, alphaOut);
-                    polygonAttributes.interiorColor = new WorldWind.Color(r/255, g/255, b/255, alphaInt);
+
+                    polygonAttributes.drawInterior = true;
+                    polygonAttributes.drawOutline = drawOutlineFlag;
                     polygonAttributes.drawVerticals = polygon.extrude;
+                    polygonAttributes.outlineColor = WorldWind.Color.BLUE;
+                    polygonAttributes.interiorColor = WorldWind.Color.WHITE;
+                    polygonAttributes.outlineColor = new WorldWind.Color(hexToR(entry.properties.color_border) / 255, hexToG(entry.properties.color_border) / 255, hexToB(entry.properties.color_border) / 255, alphaOut);
+                    polygonAttributes.interiorColor = new WorldWind.Color(r/255, g/255, b/255, 1);
+                    polygonAttributes.applyLighting = true;
                     polygon.attributes = polygonAttributes;
 
 
@@ -325,72 +373,95 @@ var buildGeometries = function(tile, polygonList, lineList, geometries, searchRe
                 }
             }
         } else if (entry.type === 'LineString') {
-            var _coords = [];
+            //var _coords = [];
 
-            for (var j in entry.coordinates) {
-                _coords.push(new WorldWind.Location(entry.coordinates[j][1], entry.coordinates[j][0]));
-            }
-            _shapeAttributes.outlineColor = new WorldWind.Color(hexToR(entry.properties.color_fill) / 255, hexToG(entry.properties.color_fill) / 255, hexToB(entry.properties.color_fill) / 255, 1);
-            _shapeAttributes.lineWidth = entry.properties.line_width;
-
-            var _line = new WorldWind.SurfacePolyline(_coords, new WorldWind.ShapeAttributes(_shapeAttributes));
-
-            _line.osmid = entry.id;
-            if (entry.type_id === 1){
-                list.push(entry.id);
-            }
-            _line.highlightAttributes = new WorldWind.ShapeAttributes(_shapeAttributes);
-            _line.visible = false;
-            _line.typeId = entry.properties.type_id;
-            _line.properties = entry.properties;
-            lineList.push(_line);
-            _line.visible = false;
-
+            //for (var j in entry.coordinates) {
+            //    _coords.push(new WorldWind.Location(entry.coordinates[j][1], entry.coordinates[j][0]));
+            //}
+            //_shapeAttributes.outlineColor = new WorldWind.Color(hexToR(entry.properties.color_fill) / 255, hexToG(entry.properties.color_fill) / 255, hexToB(entry.properties.color_fill) / 255, 1);
+            //_shapeAttributes.lineWidth = entry.properties.line_width;
+            //
+            //var _line = new WorldWind.SurfacePolyline(_coords, new WorldWind.ShapeAttributes(_shapeAttributes));
+            //
+            //_line.osmid = entry.id;
+            //if (entry.type_id === 1){
+            //    list.push(entry.id);
+            //}
+            //_line.highlightAttributes = new WorldWind.ShapeAttributes(_shapeAttributes);
+            //_line.visible = false;
+            //_line.typeId = entry.properties.type_id;
+            //_line.properties = entry.properties;
+            //lineList.push(_line);
+            //_line.visible = false;
 
 
             addType(LINE, createType(entry.properties.type_id, entry.properties.type_key, entry.properties.type_value, false));
 
 
-
-
 //            console.log(createType(entry.properties.type_id, entry.properties.type_key, entry.properties.type_value, false));
 //
-//            var pathPositions = [];
+            var pathPositions = [];
+
+            for (var j in entry.coordinates) {
+                pathPositions.push(new WorldWind.Position(entry.coordinates[j][1], entry.coordinates[j][0], 0.0));
+            }
 //
-//            for (var j in entry.coordinates) {
-//                pathPositions.push(new WorldWind.Position(entry.coordinates[j][1], entry.coordinates[j][0], 0.0));
-//            }
-//
-//            // Create the path.
-//            var path = new WorldWind.Path(pathPositions);
-//            path.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-//            path.followTerrain = true;
-//            path.extrude = false; // make it a curtain
-//            path.useSurfaceShapeFor2D = true; // use a surface shape in 2D mode
-//
-//            // Create and assign the path's attributes.
-//            var pathAttributes = new WorldWind.ShapeAttributes(null);
-//
-//            pathAttributes.outlineColor = new WorldWind.Color(hexToR(entry.properties.color_fill) / 255, hexToG(entry.properties.color_fill) / 255, hexToB(entry.properties.color_fill) / 255, 1);
-//            pathAttributes.outlineWidth = entry.properties.line_width * 4;
-//
-//            pathAttributes.interiorColor = new WorldWind.Color(0, 1, 1, 0.5);
-//            pathAttributes.drawVerticals = path.extrude; // draw verticals only when extruding
-//            path.attributes = pathAttributes;
-//
-//            // Create and assign the path's highlight attributes.
-//            var highlightAttributes = new WorldWind.ShapeAttributes(pathAttributes);
-//            highlightAttributes.outlineColor = WorldWind.Color.RED;
-//            highlightAttributes.interiorColor = new WorldWind.Color(1, 1, 1, 0.5);
-//            path.highlightAttributes = highlightAttributes;
-//
-//            // Add the path to a layer and the layer to the World Window's layer list.
-//
-//            path.visible = false;
-//            path.typeId = entry.properties.type_id;
-//            path.properties = entry.properties;
-//            lineList.push(path);
-//            path.visible = false;
+            // Create the path.
+            var path = new WorldWind.Path(pathPositions);
+            path.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+            path.followTerrain = true;
+            path.extrude = false; // make it a curtain
+            path.useSurfaceShapeFor2D = true; // use a surface shape in 2D mode
+
+            // Create and assign the path's attributes.
+            var pathAttributes = new WorldWind.ShapeAttributes(null);
+
+            pathAttributes.outlineColor = new WorldWind.Color(hexToR(entry.properties.color_fill) / 255, hexToG(entry.properties.color_fill) / 255, hexToB(entry.properties.color_fill) / 255, 1);
+            //pathAttributes.outlineWidth = entry.properties.line_width * 4;
+            pathAttributes.outlineWidth = 20;
+
+            pathAttributes.interiorColor = new WorldWind.Color(0, 1, 1, 0.5);
+            pathAttributes.drawVerticals = path.extrude; // draw verticals only when extruding
+            path.attributes = pathAttributes;
+
+            // Create and assign the path's highlight attributes.
+            var highlightAttributes = new WorldWind.ShapeAttributes(pathAttributes);
+            highlightAttributes.outlineColor = WorldWind.Color.RED;
+            highlightAttributes.interiorColor = new WorldWind.Color(1, 1, 1, 0.5);
+            path.highlightAttributes = highlightAttributes;
+
+            // Add the path to a layer and the layer to the World Window's layer list.
+
+            path.visible = false;
+            path.typeId = entry.properties.type_id;
+            path.properties = entry.properties;
+            lineList.push(path);
+            path.visible = false;
+
+        }  else if (entry.type === 'Point') {
+            placemark = new WorldWind.Placemark(new WorldWind.Position(entry.coordinates[1], entry.coordinates[0], 30), true, null);
+            placemark.label = entry.properties.type_value.replace("_", " ").capitalizeFirstLetter() ;
+            placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+
+            // Create the placemark attributes for this placemark. Note that the attributes differ only by their
+            // image URL
+            placemarkAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
+            placemarkAttributes.imageSource = "./img/marker.png";
+            placemark.attributes = placemarkAttributes;
+
+            // Create the highlight attributes for this placemark. Note that the normal attributes are specified as
+            // the default highlight attributes so that all properties are identical except the image scale. You could
+            // instead vary the color, image, or other property to control the highlight representation.
+            highlightAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
+            highlightAttributes.imageScale = 1.2;
+            placemark.highlightAttributes = highlightAttributes;
+            placemark.visible = true;
+            placemark.typeId = entry.properties.type_id;
+            addType(POINT, createType(entry.properties.type_id, entry.properties.type_key, entry.properties.type_value, false));
+            pointList.push(placemark);
+
+            // Add the placemark to the layer.
+            //shapesLayer.addRenderable(placemark);
         } else {
             //console.log(entry.type);
         }

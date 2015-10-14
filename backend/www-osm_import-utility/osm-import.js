@@ -74,6 +74,7 @@ var getNames = function(callback){
 
 
 var storeNames = function(callback){
+
     if (callback.rows.length === 0){
         callback.list_next = callback.list;
         afterCreate(callback);
@@ -81,6 +82,7 @@ var storeNames = function(callback){
     for (var i in callback.rows) {
         var obj = callback.rows[i];
         if (obj.name) {
+            console.log(obj.name);
             var _nameArray = obj.name.split(" ");
 
             counter += _nameArray.length;
@@ -347,7 +349,8 @@ var updateNames = function(){
     counter = 0;
 
     if (current === undefined){
-        current = 1;
+        current = 3;
+        console.log("current: "+current);
 
         var callback = {
             params : {
@@ -441,6 +444,7 @@ var runAll = function(){
 }
 
 var test = function () {
+
     console.log("my test");
 }
 

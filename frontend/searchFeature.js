@@ -173,7 +173,7 @@ var selectResultEntry = function(osmId){
     fillDescriptionPanel(polygonProps);
     var polygon = undefined;
     if (polygonProps.coordinates){
-        polygon =  buildGeometries(undefined, [], [], [polygonProps], true);
+        polygon =  buildGeometries(undefined, [], [], [], [polygonProps], true);
     }
 
     centerPolygon(polygon);
@@ -193,7 +193,7 @@ var retrievePolygon = function(id){
                 $('#searchResultPolygonsPanel').hide('blind');
 
                 if (result.coordinates){
-                    polygon =  buildGeometries(undefined, [], [], [result], true);
+                    polygon =  buildGeometries(undefined, [], [], [], [result], true);
                 }
             },
 

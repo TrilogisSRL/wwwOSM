@@ -8,7 +8,9 @@
  * @author Gustavo German Soria
  */
 
-var endpoint = "http://wwwosm.trilogis.it/api";
+// var endpoint = "http://wwwosm.trilogis.it/api";
+var endpoint = "http://localhost:8080";
+//var endpoint = "http://192.168.199.150:8080";
 
 var polygonStyleList = [];
 var selectedStyle = 0;
@@ -65,9 +67,11 @@ var fillModalPanel = function(id){
 
     if (style && found){
         selectedStyle = id;
-
+        console.log(style.type_key);
         $('#editModalLabel').val("Edit Style "+id);
         $('#lod').val(style.lod);
+        $('#key').text(+style.type_key);
+        $('#value').text(style.type_value);
 
         $('#elevation').val(style.elevation);
 

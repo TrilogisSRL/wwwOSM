@@ -234,6 +234,17 @@
             </div>
 
 
+            <div class="panel panel-default-block">
+                <div class="panel-body">
+                    <div class="row"> <img  class="navbar-text" src="img/trilogis-logo.png"  height="35px" style="vertical-align: text-bottom; padding: 5px">
+                    </div>
+                    <div class="row">
+                        <img  class="navbar-text" src="img/nasa-logo.png"  height="35px" style="vertical-align: text-bottom; padding: 5px">
+                        <img  class="navbar-text" src="img/osm-logo.png"  height="35x" style="vertical-align: text-bottom; padding: 5px">
+                    </div>
+                </div>
+            </div>
+
             <div class="panel panel-default-block" style="display: none;" id="description_panel">
                 <div class="modal-header">
                     <button id="close_picked_obj_panel" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -261,16 +272,7 @@
 
 
             </div>
-            <div class="panel panel-default-block">
-                <div class="panel-body">
-                    <div class="row"> <img  class="navbar-text" src="img/trilogis-logo.png"  height="35px" style="vertical-align: text-bottom; padding: 5px">
-                    </div>
-                    <div class="row">
-                        <img  class="navbar-text" src="img/nasa-logo.png"  height="35px" style="vertical-align: text-bottom; padding: 5px">
-                        <img  class="navbar-text" src="img/osm-logo.png"  height="35x" style="vertical-align: text-bottom; padding: 5px">
-                    </div>
-                </div>
-            </div>
+
 
 
 
@@ -335,6 +337,23 @@
                         <div id="polylinesList" class="list-group">
                         </div>
                     </div>
+
+                    <hr/>
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Point types</h4>
+                    </div>
+                    <div>
+                        <ul id="selectedPoints">
+                        </ul>
+                    </div>
+
+                    <button class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapsePointList" aria-expanded="false" aria-controls="collapseExample">
+                        Points
+                    </button>
+                    <div class="collapse" id="collapsePointList">
+                        <div id="pointList" class="list-group">
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -344,7 +363,9 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <center>
-                        <canvas id="wwd" width="700" height="600">
+                        <canvas id="wwd" style="height: 100vh;
+  width: 100%;
+  display: block;">
                             Your browser does not support HTML5 Canvas.
                         </canvas>
                     </center>

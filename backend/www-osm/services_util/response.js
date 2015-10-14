@@ -20,50 +20,62 @@ var send = function(callback) {
 
 var print = function(callback) {
 
-    if (callback.rows.length === 0){
-        callback.parameter.end(JSON.stringify({"type": "GeometryCollection", "geometries": []}));
-        return;
-    }
+    //console.log("print");
+    //console.log("callback.rows: ");
+    //console.log(callback.rows);
 
-    callback.parameter.setHeader('Content-Type', 'application/json');
-    callback.parameter.setHeader('Access-Control-Allow-Origin', '*');
-    if (callback.obj === undefined){
+    if (callback.obj === undefined) {
         callback.obj = {"type": "GeometryCollection", "geometries": []};
     }
 
-    for (var i in callback.rows){
+    if (callback.rows.length > 0) {
+        //callback.parameter.end(JSON.stringify({"type": "GeometryCollection", "geometries": []}));
+        //return;
 
-        var obj = callback.rows[i];
-        var geom = JSON.parse(callback.rows[i].geom);
-        var toJSON = {
-            'type': geom.type,
-            'id': obj.osm_id,
-            'coordinates': geom.coordinates,
-            'properties': {}
-        }
 
-        delete obj['way'];
-        delete obj['osm_id'];
-        delete obj['bgeom'];
-        delete obj['geom'];
-        delete obj['geomm'];
+        callback.parameter.setHeader('Content-Type', 'application/json');
+        callback.parameter.setHeader('Access-Control-Allow-Origin', '*');
 
-        for (var k in obj) {
-            if (!(obj[k] === null || obj[k] === undefined)) {
-                if (k === 'color_fill' || k === 'color_border'){
-                    toJSON.properties[k] = "#"+obj[k];
-                } else {
-                    toJSON.properties[k] = obj[k];
+
+        for (var i in callback.rows) {
+
+            var obj = callback.rows[i];
+            var geom = JSON.parse(callback.rows[i].geom);
+
+            var toJSON = {
+                'type': geom.type,
+                'id': obj.osm_id,
+                'coordinates': geom.coordinates,
+                'properties': {}
+            }
+
+            delete obj['way'];
+            delete obj['osm_id'];
+            delete obj['bgeom'];
+            delete obj['geom'];
+            delete obj['geomm'];
+
+            for (var k in obj) {
+                if (!(obj[k] === null || obj[k] === undefined)) {
+                    if (k === 'color_fill' || k === 'color_border') {
+                        toJSON.properties[k] = "#" + obj[k];
+                    } else {
+                        toJSON.properties[k] = obj[k];
+                    }
                 }
             }
+            callback.obj.geometries.push(toJSON);
         }
-        callback.obj.geometries.push(toJSON);
+
     }
 
+    //console.log("list.length: "+callback.list.length);
     var _next = callback.list.pop();
     if (_next){
         _next(callback);
+        //console.log("next");
     } else {
+        //console.log("end");
         callback.parameter.end(JSON.stringify(callback.obj));
     }
 };
@@ -74,8 +86,8 @@ var printSources = function(callback){
         callback.parameter.setHeader('Access-Control-Allow-Origin', '*');
         callback.parameter.end(JSON.stringify(callback.rows));
     } else {
-    callback.parameter.end("an error as occurred with code 0021");
-}
+        callback.parameter.end("an error as occurred with code 0021");
+    }
 }
 
 var printSource = function(callback){

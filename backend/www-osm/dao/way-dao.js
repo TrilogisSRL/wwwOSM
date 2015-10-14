@@ -137,6 +137,7 @@ var getPolygonsByBBox = function(callback) {
      The callback object includes the way builder method call and the one for the exposure
      of the information via JSON.
      */
+    //console.log(_params);
     database.execute(queries.getPolygonsByBbox(list), _params , callback);
 };
 
@@ -182,7 +183,51 @@ var getPolylinesByBBox = function(callback) {
      The callback object includes the way builder method call and the one for the exposure
      of the information via JSON.
      */
+    //console.log(_params);
     database.execute(queries.getPolylinesByBbox(list), _params, callback);
+}
+
+var getPointsByBBox = function(callback) {
+
+    //console.log("getPointsByBox");
+    /*
+     Check the validity of the bounding box. An error is raised if it is not satisfied
+     */
+//    if (!validator.bbox(callback.bbox)){
+//        error.send(callback, "invalid bounding box");
+//    }
+
+    /*
+     Check the validity of the level of detail. An error is raised if it is not satisfied
+     */
+    if (!validator.lod(callback.lod)){
+        error.send(callback, "invalid level of detail");
+    }
+
+    /*
+     set the current entity type
+     */
+    callback.entity = "way";
+
+    /*
+     The variables are now ready to be used within the query
+     */
+    var _params = [
+        callback.bbox.longitudeLB,
+        callback.bbox.latitudeLB,
+        callback.bbox.longitudeUB,
+        callback.bbox.latitudeUB,
+        callback.lod
+    ];
+
+    var list = callback.excludeLines;
+
+    /*
+     The callback object includes the way builder method call and the one for the exposure
+     of the information via JSON.
+     */
+    //console.log(_params);
+    database.execute(queries.getPointsByBbox(list), _params, callback);
 };
 
 var getPolylinesByName = function(callback){
@@ -202,3 +247,4 @@ module.exports.getPolylineByOsmId = getPolylineByOsmId;
 module.exports.getPolygonsByBbox = getPolygonsByBBox;
 module.exports.getPolylinesByBbox = getPolylinesByBBox;
 module.exports.getPolylinesByName = getPolylinesByName;
+module.exports.getPointsByBBox = getPointsByBBox;

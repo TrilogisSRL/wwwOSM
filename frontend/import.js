@@ -5,7 +5,8 @@
  *
  */
 
-var endpoint = "http://wwwosm.trilogis.it/api";
+var endpoint = "http://localhost:8080";
+//var endpoint = "http://wwwosm.trilogis.it/api";
 var currentLog = 0;
 var panels = [];
 var buttons = ['submitButton'];

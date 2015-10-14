@@ -138,6 +138,54 @@ var getTempTable = function(callback){
     return table;
 }
 
+var getTable = function(callback){
+
+    /*
+     validation of the entity type identifier
+     */
+    val.assertType(callback);
+
+    /*
+     variable for the table name, initialized as undefined
+     */
+    var table = undefined;
+
+    /*
+     select the correct value for the table variable
+     */
+    switch (callback.params.type) {
+        case params.LINE :
+        {
+            table = line.model.mainTable;
+        }
+            break;
+        case params.POLYGON :
+        {
+            table = polygon.model.mainTable;
+        }
+            break;
+        case params.ROAD :
+        {
+            table = road.model.mainTable;
+        }
+            break;
+        case params.POINT :
+        {
+            table = point.model.mainTable;
+        }
+            break;
+    }
+
+    /*
+     validation of the table variable
+     */
+
+    val.assertNotUndefined(table, 'ndq03');
+
+    return table;
+}
+
+
 /**
  * Internal use: it retrieves the correct table name (name relationship table) from the given entity type identifier stored in the callback object
  * @param callback Callback object in which is stored the entity type identifier
@@ -261,7 +309,8 @@ var storeNameRelation = function(callback){
 
 var getNames = function(callback){
 
-    var table = getTempTable(callback);
+    var table = getTable(callback);
+    //var table = getTempTable(callback);
     var query = "SELECT osm_id, name FROM "+table+" WHERE name IS NOT NULL";
     return query;
 }

@@ -6,11 +6,11 @@ if [ -z "$1" ]
   then
     echo "No argument supplied. Please select the source path"
 else {
-    echo "0. START: $(date)" && \
-    echo "1. Remove: $DIR/temp/$2" && \
-    rm -f $DIR/temp/$2 && \
-    echo "2. Download: $1" && \
-    wget -P $DIR/temp $1  && \
+    #echo "0. START: $(date)" && \
+    #echo "1. Remove: $DIR/temp/$2" && \
+    #rm -f $DIR/temp/$2 && \
+    #echo "2. Download: $1" && \
+    #wget -P $DIR/temp $1  && \
     echo "3. IMPORT: $2" && \
     echo "3.1. Clean Temp Database:" && \
     echo $DIR/clean-temp-database && \

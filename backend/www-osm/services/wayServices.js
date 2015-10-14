@@ -78,6 +78,8 @@ function listen (router){
 
     router.post('/bbox', function(request, response) {
 
+        //console.log(JSON.stringify(request.post));
+
         var maxLatitude =  request.post.maxLatitude;
         var maxLongitude =  request.post.maxLongitude;
         var minLatitude =  request.post.minLatitude;
@@ -102,11 +104,16 @@ function listen (router){
             parameter       :   response,
             list            :
                 [   responseUtil.print,
+                    //wayDao.getPolygonsByBbox,
+                    //responseUtil.print,
                     //wayDao.getPolylinesByBbox,
-                    //responseUtil.print
+                    //responseUtil.print,
+                    wayDao.getPointsByBBox,
+                    responseUtil.print
                 ]
         };
 
+        //wayDao.getPointsByBBox(_callback);
         wayDao.getPolygonsByBbox(_callback);
     });
 

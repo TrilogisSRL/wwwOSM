@@ -18,7 +18,10 @@ var canvas = document.getElementById("wwd");
  * APIs Endpoint
  * @type {string}
  */
-var endpoint = "http://wwwosm.trilogis.it/api";
+// var endpoint = "http://wwwosm.trilogis.it/api";
+var endpoint = "http://localhost:8080";
+//var endpoint = "http://192.168.199.150:8080";
+
 
 /*
 disable Web World Wind logging
@@ -137,10 +140,11 @@ var oldTiles = 0;
 var currentLayer = osmLayer;
 var db = [];
 var activeTiles = [];
+var highlightedGeoms = [];
 var geomList = [];
 var lastRedraw = 0;
 var redrawThreshold = 800;
-var POLYGON = 0, LINE = 1;
+var POLYGON = 0, LINE = 1, POINT = 2;
 var highlightPolygons = [];
 
 /*
@@ -153,7 +157,7 @@ var tiledRoofFlag = true;
 /*
  Categories enabled by default
  */
-var types = {polygonList: [], polygonEnabled: [36, 4, 1, 32, 33, 17, 34, 35, 14], lineList: [], lineEnabled: []};
+var types = {pointList: [], pointEnabled: [1], polygonList: [], polygonEnabled: [36, 4, 1, 32, 33, 17, 34, 35, 14], lineList: [], lineEnabled: []};
 
 
 /**
@@ -177,6 +181,13 @@ var filter = function() {
                 $("#selectedLines").append('<li id="selectedLine'+entry.typeId+'">'+entry.typeKey+' - '+entry.typeValue+'</li>');
             }
         });
+
+        $("#selectedPoints").empty();
+        types.pointList.forEach(function(entry){
+            if (entry.enabled){
+                $("#selectedPoints").append('<li id="selectedPoint'+entry.typeId+'">'+entry.typeKey+' - '+entry.typeValue+'</li>');
+            }
+        });
     }
 
     /**
@@ -198,6 +209,8 @@ var filter = function() {
         wwd.redraw();
     }
 
+
+
     types.polygonEnabled.length = 0;
     types.polygonList.forEach(function (entry) {
 
@@ -217,6 +230,18 @@ var filter = function() {
         if (hasClass) {
             entry.enabled = true;
             this.types.lineEnabled.push(entry.typeId);
+        } else {
+            entry.enabled = false;
+        }
+    });
+
+    types.pointEnabled.length = 0;
+    types.pointList.forEach(function (entry) {
+
+        var hasClass = $('#' + 'point' + entry.typeId).hasClass('active');
+        if (hasClass) {
+            entry.enabled = true;
+            this.types.pointEnabled.push(entry.typeId);
         } else {
             entry.enabled = false;
         }
@@ -299,6 +324,8 @@ var drawTile = function(tile){
             list = types.polygonEnabled;
         } else if (entity === LINE) {
             list = types.lineEnabled;
+        } else {
+            list = types.pointEnabled;
         }
 
         if (list){
@@ -311,9 +338,9 @@ var drawTile = function(tile){
         return false;
     }
 
-    if (tile.draw === undefined || tile.draw === null){
-        tile.draw = {polygons: [], lines: []};
-        buildGeometries(tile, tile.draw.polygons, tile.draw.lines, tile.geometries, false);
+    if (tile.draw === undefined || tile.draw === null || tile.points === null){
+        tile.draw = {polygons: [], lines: [], points: []};
+        buildGeometries(tile, tile.draw.polygons, tile.draw.lines, tile.draw.points, tile.geometries, false);
     }
 
     /**
@@ -346,7 +373,12 @@ var drawTile = function(tile){
         }
     });
 
-
+    tile.draw.points.forEach(function (entry) {
+        if (isGeomEnabled(POINT, entry.typeId)){
+            entry.visible = true;
+            shapesLayer.addRenderable(entry);
+        }
+    });
 }
 
 /**
@@ -489,6 +521,10 @@ var redrawEvent_aux = function(){
                 tile.draw.lines.forEach(function (entry){
                     shapesLayer.removeRenderable(entry);
                 });
+
+                tile.draw.points.forEach(function (entry){
+                    shapesLayer.removeRenderable(entry);
+                });
             }
         }
 
@@ -534,7 +570,53 @@ var redrawEvent_aux = function(){
     checkTiles();
 }
 
+var highlightedItems = [];
+var handlePick = function (o) {
+    // The input argument is either an Event or a TapRecognizer. Both have the same properties for determining
+    // the mouse or tap location.
+    var x = o.clientX,
+        y = o.clientY;
 
+    var redrawRequired = highlightedItems.length > 0; // must redraw if we de-highlight previously picked items
+
+    // De-highlight any previously highlighted placemarks.
+    for (var h = 0; h < highlightedItems.length; h++) {
+        highlightedItems[h].highlighted = false;
+    }
+    highlightedItems = [];
+
+    // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
+    // relative to the upper left corner of the canvas rather than the upper left corner of the page.
+    var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
+    if (pickList.objects.length > 0) {
+        //console.log(pickList.objects.length+ " objs have been picked");
+        redrawRequired = true;
+    }
+
+    // Highlight the items picked by simply setting their highlight flag to true.
+    if (pickList.objects.length > 0) {
+        for (var p = 0; p < pickList.objects.length; p++) {
+            pickList.objects[p].userObject.highlighted = true;
+
+            // Keep track of highlighted items in order to de-highlight them later.
+            highlightedItems.push(pickList.objects[p].userObject);
+
+            // Detect whether the placemark's label was picked. If so, the "labelPicked" property is true.
+            // If instead the user picked the placemark's image, the "labelPicked" property is false.
+            // Applications might use this information to determine whether the user wants to edit the label
+            // or is merely picking the placemark as a whole.
+            if (pickList.objects[p].labelPicked) {
+                //console.log("Label picked");
+            }
+        }
+    }
+
+    // Update the window if we changed anything.
+    if (redrawRequired) {
+        wwd.redraw(); // redraw to make the highlighting changes take effect on the screen
+    }
+};
+//wwd.addEventListener("dbclick", handlePick);
 /**
  * Fire the Redraw Event in order to redraw the OSM geometries if it is necessary
  */
@@ -546,4 +628,8 @@ canvas.addEventListener(WorldWind.REDRAW_EVENT_TYPE, function(){
 
 }, false);
 
+
+String.prototype.capitalizeFirstLetter = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
 
